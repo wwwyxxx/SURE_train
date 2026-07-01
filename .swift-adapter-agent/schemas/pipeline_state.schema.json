@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ms-swift Adapter Pipeline State",
+  "type": "object",
+  "required": ["run_id", "input", "path", "stages", "current_stage", "overall_status", "created_at", "updated_at"],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "Unique run identifier, e.g. 20260623-143052"
+    },
+    "input": {
+      "type": "object",
+      "required": ["model_family", "dataset_path", "dataset_name"],
+      "properties": {
+        "model_family": { "type": "string" },
+        "model_path": { "type": ["string", "null"] },
+        "base_model_path": { "type": ["string", "null"] },
+        "component_paths": { "type": ["object", "null"] },
+        "component_trainable": { "type": ["object", "null"] },
+        "additional_trainable_parameters": { "type": ["array", "null"] },
+        "whisper_path": { "type": ["string", "null"] },
+        "dataset_path": { "type": "string" },
+        "dataset_name": { "type": "string" },
+        "source_code_url": { "type": ["string", "null"] },
+        "paper_url": { "type": ["string", "null"] },
+        "output_run_id": { "type": ["string", "null"] },
+        "max_gpus": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "path": {
+      "type": "string",
+      "enum": ["custom", "registered"],
+      "description": "Pipeline path: custom (unregistered model) or registered (native ms-swift model)"
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "docker_image": { "type": ["string", "null"] },
+        "dockerfile": { "type": ["string", "null"] },
+        "import_test_passed": { "type": ["boolean", "null"] }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/stage" }
+    },
+    "current_stage": {
+      "type": "string",
+      "enum": [
+        "hardware_probe",
+        "environment_setup",
+        "swift_support_check",
+        "model_analysis",
+        "user_decision",
+        "download_weights",
+        "dataset_register",
+        "model_register",
+        "template_register",
+        "integration_test",
+        "smoke_test",
+        "training_script",
+        "full_training",
+        "registered_model_info",
+        "registered_checkpoint_assembly",
+        "registered_dataset_register",
+        "registered_integration_test",
+        "registered_smoke_test",
+        "registered_training_script",
+        "registered_full_training",
+        "completed",
+        "failed"
+      ]
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["pending", "in_progress", "completed", "failed"]
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "error_summary": { "type": ["string", "null"] }
+  },
+  "definitions": {
+    "stage": {
+      "type": "object",
+      "required": ["id", "name", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "hardware_probe",
+            "environment_setup",
+            "swift_support_check",
+            "model_analysis",
+            "user_decision",
+            "download_weights",
+            "dataset_register",
+            "model_register",
+            "template_register",
+            "integration_test",
+            "smoke_test",
+            "training_script",
+            "full_training",
+            "registered_model_info",
+            "registered_checkpoint_assembly",
+            "registered_dataset_register",
+            "registered_integration_test",
+            "registered_smoke_test",
+            "registered_training_script",
+            "registered_full_training"
+          ]
+        },
+        "name": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in_progress", "completed", "failed", "skipped"]
+        },
+        "started_at": { "type": ["string", "null"], "format": "date-time" },
+        "completed_at": { "type": ["string", "null"], "format": "date-time" },
+        "output": { "type": "object" },
+        "validation": {
+          "type": ["object", "null"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "validator": { "type": ["string", "null"] },
+            "report": { "type": ["string", "null"] },
+            "metrics": { "type": "object" }
+          }
+        },
+        "code_path": { "type": ["string", "null"] },
+        "code_section": { "type": ["string", "null"] },
+        "log_path": { "type": ["string", "null"] },
+        "error": {
+          "type": ["object", "null"],
+          "properties": {
+            "type": { "type": "string" },
+            "message": { "type": "string" },
+            "traceback": { "type": ["string", "null"] }
+          }
+        },
+        "retry_count": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

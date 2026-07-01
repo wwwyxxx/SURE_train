@@ -1,0 +1,4 @@
+interface:
+  display_name: "Label Mask Debugger"
+  short_description: "Debug label shift, loss masks, and padding in training samples."
+  default_prompt: "Check whether my model training labels, loss mask, and padding are aligned correctly."

@@ -1,0 +1,11 @@
+{
+  "model_family": "kimi_audio",
+  "model_path": "/workspace/model/Qwen2.5-7B",
+  "whisper_path": "/workspace/model/whisper-large-v3",
+  "dataset_path": "data/combined_asr_aishell-1.jsonl",
+  "dataset_name": "combined_asr_aishell_1",
+  "source_code_url": "/workspace/Kimi-Audio",
+  "paper_url": "/workspace/papers/kimi-audio.pdf",
+  "max_gpus": 7,
+  "output_run_id": ""
+}

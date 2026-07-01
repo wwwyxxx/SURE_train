@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ms-swift Adapter Pipeline Input",
+  "type": "object",
+  "required": ["model_family", "dataset_path", "dataset_name"],
+  "properties": {
+    "model_family": {
+      "type": "string",
+      "description": "Model family. Supported native ms-swift families and custom families.",
+      "enum": [
+        "kimi_audio",
+        "mimo_audio",
+        "qwen2_audio",
+        "qwen_audio",
+        "qwen_omni",
+        "qwen2_5_omni",
+        "qwen3_omni",
+        "step_audio",
+        "step_audio2_mini",
+        "qwen2",
+        "llama3",
+        "other"
+      ]
+    },
+    "model_path": {
+      "type": "string",
+      "description": "Path to model weights. If empty, inferred from model_family."
+    },
+    "base_model_path": {
+      "type": ["string", "null"],
+      "description": "Path to an official/base checkpoint to copy config, tokenizer, and processor files from."
+    },
+    "component_paths": {
+      "type": ["object", "null"],
+      "description": "Per-component initialization sources. Keys are component names (e.g. language_model, aligner, vision_tower, generator). Values are a path string or the literal 'random'.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Path to component checkpoint weights, or the literal 'random' to keep random initialization."
+      }
+    },
+    "component_trainable": {
+      "type": ["object", "null"],
+      "description": "Per-component train/freeze strategy. Keys are component names (language_model, vision_tower, aligner, generator) or the pseudo-component 'text_head'. Values are boolean (true=train, false=freeze).",
+      "additionalProperties": {
+        "type": "boolean",
+        "description": "Whether this component should be trainable."
+      }
+    },
+    "additional_trainable_parameters": {
+      "type": ["array", "null"],
+      "description": "Optional additional parameter name prefixes to keep trainable when their parent component is frozen. Use only when the automatic text_head resolution is insufficient.",
+      "items": { "type": "string" }
+    },
+    "whisper_path": {
+      "type": ["string", "null"],
+      "description": "Path to whisper model (for custom audio models like kimi_audio/mimo_audio)."
+    },
+    "dataset_path": {
+      "type": "string",
+      "description": "Path to dataset jsonl."
+    },
+    "dataset_name": {
+      "type": "string",
+      "description": "Registered dataset name."
+    },
+    "source_code_url": {
+      "type": ["string", "null"],
+      "description": "Local path or URL to model source code. Required for custom models; optional for registered models."
+    },
+    "paper_url": {
+      "type": ["string", "null"],
+      "description": "Local path or URL to paper. Required for custom models; optional for registered models."
+    },
+    "max_gpus": {
+      "type": "integer",
+      "description": "Maximum number of GPUs to use for training.",
+      "default": 7
+    },
+    "output_run_id": {
+      "type": ["string", "null"],
+      "description": "Optional manual run id."
+    }
+  }
+}

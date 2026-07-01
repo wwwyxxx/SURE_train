@@ -1,0 +1,19 @@
+{
+  "model_family": "qwen2_5_omni",
+  "base_model_path": "/aistor/hpc_stor01/home/yixuan.wang_sx/SURE_train/model/Qwen2.5-Omni-7B",
+  "component_paths": {
+    "language_model": "/aistor/hpc_stor01/home/yixuan.wang_sx/SURE_train/model/Qwen2.5-7B",
+    "vision_tower": "/aistor/hpc_stor01/home/yixuan.wang_sx/SURE_train/model/whisper-large-v3",
+    "aligner": "random"
+  },
+  "component_trainable": {
+    "language_model": false,
+    "vision_tower": false,
+    "aligner": true,
+    "generator": false,
+    "text_head": true
+  },
+  "dataset_path": "data/combined_asr_local.jsonl",
+  "dataset_name": "combined_asr_local",
+  "max_gpus": 7
+}

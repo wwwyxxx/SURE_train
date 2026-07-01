@@ -1,0 +1,6 @@
+{
+  "model_family": "kimi_audio",
+  "dataset_path": "data/combined_asr_aishell-1.jsonl",
+  "dataset_name": "combined_asr_aishell_1",
+  "max_gpus": 7
+}

@@ -1,0 +1,5 @@
+{
+  "language_model": "/workspace/SURE_train/model/Qwen2.5-7B",
+  "vision_tower": "/workspace/SURE_train/model/whisper-large-v3",
+  "aligner": "random"
+}

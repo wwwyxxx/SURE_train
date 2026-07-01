@@ -59,6 +59,23 @@ MiMo-Audio/
 ms-swift/
 Qwen2-Audio/
 
+# PDFs / generated documents
+*.pdf
+papers/
+
+# Model config directories (local model copies)
+Kimi-Audio-7B/
+MiMo-7B-Base/
+MiMo-Audio-7B-Base/
+MiMo-Audio-7B-Base-merged/
+MiMo-Audio-7B-Base-merged-v2/
+MiMo-Audio-7B-Base-merged-v3/
+MiMo-Audio-Tokenizer/
+Qwen1.5-7B/
+Qwen2-7B/
+Qwen2-Audio-7B/
+glm-4-voice-tokenizer/
+
 # Misc
 SURE_train/
 example.zip

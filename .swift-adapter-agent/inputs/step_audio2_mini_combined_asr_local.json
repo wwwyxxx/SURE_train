@@ -1,0 +1,18 @@
+{
+  "model_family": "step_audio2_mini",
+  "base_model_path": "model/Step-Audio-2-mini",
+  "component_paths": {
+    "language_model": "model/Qwen2.5-7B",
+    "vision_tower": "model/Qwen2-Audio-7B",
+    "aligner": "random"
+  },
+  "component_trainable": {
+    "language_model": false,
+    "vision_tower": false,
+    "aligner": true,
+    "text_head": true
+  },
+  "dataset_path": "data/combined_asr_local.jsonl",
+  "dataset_name": "combined_asr_local",
+  "max_gpus": 7
+}

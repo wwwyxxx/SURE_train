@@ -1,0 +1,4 @@
+interface:
+  display_name: "Swift Model Adapter"
+  short_description: "Adapt new models into ms-swift training."
+  default_prompt: "Help me adapt a new model into ms-swift by registering the model, template, dataset, initialization, and loss glue."

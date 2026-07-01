@@ -1,0 +1,26 @@
+FROM nvidia/cuda:{{cuda_version}}-cudnn8-devel-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    git \
+    python3 \
+    python3-pip \
+    libsndfile1 \
+    ffmpeg \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ms-swift
+RUN git clone https://github.com/modelscope/ms-swift.git /ms-swift
+WORKDIR /ms-swift
+RUN pip install --no-cache-dir -e .
+
+# Install model-specific requirements
+COPY model_requirements.txt /tmp/model_requirements.txt
+RUN pip install --no-cache-dir -r /tmp/model_requirements.txt
+
+# Validate critical imports
+RUN python -c "import torch; import swift; import transformers; print('ms-swift env OK')"
+
+WORKDIR /workspace

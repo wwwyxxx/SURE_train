@@ -1,0 +1,18 @@
+{                                                                        
+    "model_family": "qwen2_audio",                                         
+    "base_model_path": "/workspace/model/Qwen2-Audio-7B",                  
+    "component_paths": {                                                   
+        "language_model": "/workspace/model/Qwen-7B",                        
+        "aligner": "random",                                                 
+        "vision_tower": "/workspace/model/whisper-large-v3"                  
+    },                                                                     
+    "component_trainable": {                                               
+        "language_model": false,                                             
+        "aligner": true,                                                     
+        "vision_tower": false,                                               
+        "text_head": true                                                    
+    },                                                                     
+    "dataset_path": "data/combined_asr_local.jsonl",                       
+    "dataset_name": "combined_asr_local",                                  
+    "max_gpus": 2                                                          
+}  
