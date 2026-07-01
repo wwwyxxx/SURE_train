@@ -1,0 +1,65 @@
+# Large data / model weights / generated outputs
+data/
+model/
+output/
+outputs/
+
+# Cache and temporary files
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+._____temp/
+
+# Logs
+*.log
+nohup.out
+
+# Environment / secrets
+.env
+*.env
+.msc
+.mv
+
+# Local tooling state
+.agents/
+.codegraph/
+.codex/
+
+# Core agent code (tracked), but exclude its generated artifacts
+# .swift-adapter-agent/
+.swift-adapter-agent/.pdf-deps/
+.swift-adapter-agent/.pdf-fonts/
+.swift-adapter-agent/.pdf-venv/
+.swift-adapter-agent/__pycache__/
+.swift-adapter-agent/outputs/
+.swift-adapter-agent/*.pdf
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+
+# Audio / token caches
+audio_tokens_cache/
+*.wav
+*.mp3
+*.flac
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+*.h5
+*.onnx
+
+# Third-party repositories (maintained as separate clones/submodules)
+Kimi-Audio/
+MiMo-Audio/
+ms-swift/
+Qwen2-Audio/
+
+# Misc
+SURE_train/
+example.zip
+input.json
