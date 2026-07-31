@@ -1,0 +1,1 @@
+{"response": ". 从而推动我们全球航运业的发展。", "labels": "新科空调", "logprobs": null, "messages": [{"role": "user", "content": "Transcribe the speech to text. <audio>", "loss": null}, {"role": "assistant", "content": ". 从而推动我们全球航运业的发展。"}], "audios": ["/workspace/example/BAC009S0002W0263.wav"]}

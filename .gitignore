@@ -20,6 +20,7 @@ nohup.out
 *.env
 .msc
 .mv
+.venv/
 
 # Local tooling state
 .agents/
@@ -27,18 +28,19 @@ nohup.out
 .codex/
 
 # Core agent code (tracked), but exclude its generated artifacts
-# .swift-adapter-agent/
-.swift-adapter-agent/.pdf-deps/
-.swift-adapter-agent/.pdf-fonts/
-.swift-adapter-agent/.pdf-venv/
-.swift-adapter-agent/__pycache__/
-.swift-adapter-agent/outputs/
-.swift-adapter-agent/*.pdf
+# agent/
+agent/.pdf-deps/
+agent/.pdf-fonts/
+agent/.pdf-venv/
+agent/__pycache__/
+agent/outputs/
+agent/*.pdf
 
 # Archives
 *.zip
 *.tar
 *.tar.gz
+.archive/custom_backup*/
 
 # Audio / token caches
 audio_tokens_cache/
@@ -58,6 +60,8 @@ Kimi-Audio/
 MiMo-Audio/
 ms-swift/
 Qwen2-Audio/
+SLAM-LLM/
+ps-slm/
 
 # PDFs / generated documents
 *.pdf
@@ -80,3 +84,17 @@ glm-4-voice-tokenizer/
 SURE_train/
 example.zip
 input.json
+tasu_input.json
+
+# Temporary debug artifacts
+tmp_*
+*.tmp
+*.bak
+
+# Vendored plotting dependencies
+.plot_deps/
+
+# Accidental shell/filesystem artifacts
+\!
+1
+EOF

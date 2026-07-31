@@ -187,7 +187,9 @@ def _load_audio_tokens(wav_path: str) -> torch.Tensor:
         if not isinstance(tokens, torch.Tensor):
             tokens = torch.tensor(tokens, dtype=torch.long)
         return tokens.long()
-    raise ValueError(f'Expected .pt cached tokens, got {wav_path}')
+    # Fallback: encode raw wav on the fly using the same audio tokenizer as training.
+    from mimo_audio_swift_register import _encode_audio_to_list
+    return torch.tensor(_encode_audio_to_list(wav_path), dtype=torch.long)
 
 
 def _build_prompt_input_ids(tokenizer, audio_tokens, prompt, speech_zeroemb_idx, empty_idx):

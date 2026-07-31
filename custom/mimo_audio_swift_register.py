@@ -375,6 +375,16 @@ def get_model_tokenizer_mimo_audio(
     if os.environ.get('MIMO_AUDIO_FREEZE_LLM', '1') != '0':
         _freeze_for_asr(model)
 
+    # Optional: re-initialize specific trainable components from scratch.
+    # This is useful for ablations that want to verify the audio base's
+    # pre-trained lm_head / speech_group_downcast are not necessary.
+    if os.environ.get('MIMO_AUDIO_RANDOM_INIT_LM_HEAD', '0') == '1':
+        logger.info('[MiMo-Audio] Re-initializing lm_head with random weights.')
+        model.lm_head.apply(lambda m: m.reset_parameters() if hasattr(m, 'reset_parameters') else None)
+    if os.environ.get('MIMO_AUDIO_RANDOM_INIT_SPEECH_GROUP_DOWNCAST', '0') == '1':
+        logger.info('[MiMo-Audio] Re-initializing speech_group_downcast with random weights.')
+        model.speech_group_downcast.apply(lambda m: m.reset_parameters() if hasattr(m, 'reset_parameters') else None)
+
     _log_component_status(model, model_dir, llm_backbone_dir)
     return model, tokenizer
 
@@ -694,6 +704,24 @@ register_dataset(
     DatasetMeta(
         dataset_path=os.path.join(_ROOT, 'data/test_audio_30s_x100.jsonl'),
         dataset_name='test_audio_30s_x100',
+        preprocess_func=MiMoAudioASRPreprocessor(),
+    ),
+    exist_ok=True,
+)
+
+register_dataset(
+    DatasetMeta(
+        dataset_path=os.path.join(_ROOT, 'data/combined_asr_local_cached_100.jsonl'),
+        dataset_name='combined_asr_local_cached_100',
+        preprocess_func=MiMoAudioASRPreprocessor(),
+    ),
+    exist_ok=True,
+)
+
+register_dataset(
+    DatasetMeta(
+        dataset_path=os.path.join(_ROOT, 'data/combined_asr_local_cached.jsonl'),
+        dataset_name='combined_asr_local_cached',
         preprocess_func=MiMoAudioASRPreprocessor(),
     ),
     exist_ok=True,
